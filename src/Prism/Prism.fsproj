@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>StaticalPrism</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+	<ServerGarbageCollection>true</ServerGarbageCollection>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputType>Exe</OutputType> <!-- In debug mode we make a console app for logging -->
+    <Tailcalls>true</Tailcalls>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningLevel>5</WarningLevel>
+    <NoWarn>FS0052</NoWarn>
+  </PropertyGroup>
+	
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputType>WinExe</OutputType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Page Remove="MainWindow.xaml" />
+	  
+    <Page Remove="Xaml\App.xaml" />
+    <Page Remove="Xaml\Common.xaml" />
+    <Page Remove="Xaml\Converters.xaml" />
+    <Page Remove="Xaml\MainWindow.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Xaml\ResourceDictionaries\Converters.xaml" />
+    <Resource Include="Xaml\ResourceDictionaries\Common.xaml" />
+    <Resource Include="Xaml\App.xaml" />
+    <Resource Include="Xaml\MainWindow.xaml" />
+    <Compile Include="XamlResources.fs" />
+    <Compile Include="ViewModelBase.fs" />
+    <Compile Include="MainViewModel.fs" />
+    <Compile Include="App.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FsXaml.Wpf" Version="3.1.6" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+    <PackageReference Include="TaskBuilder.fs" Version="2.1.0" />
+    <PackageReference Include="Ulid" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Xaml\UserControls\" />
+  </ItemGroup>
+
+  </Project>
